@@ -2,13 +2,17 @@
 /**
  * Signature element: an IPMVP-style M&V chart — dashed weather-normalized
  * baseline vs. solid actual metered load, diverging after the measure is
- * implemented; the shaded gap is the savings. Rendered as a flat band between
- * the hero text and CTA row (never behind text). Decorative only (aria-hidden).
+ * implemented; the shaded gap is the savings. Decorative (aria-hidden).
+ *
+ * `interactive` adds (1) a draw-on-load sweep and (2) a hover crosshair that
+ * reports month + savings-vs-baseline. Remove the prop to get the static
+ * chart back — all interactive code is gated on it.
  */
 interface Props {
   class?: string;
+  interactive?: boolean;
 }
-const { class: className } = Astro.props;
+const { class: className, interactive = false } = Astro.props;
 ---
 
 <svg
@@ -16,9 +20,18 @@ const { class: className } = Astro.props;
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
-  class={className}
+  class:list={[className, interactive && "lc-interactive"]}
   preserveAspectRatio="xMidYMid meet"
+  data-loadcurve={interactive ? "interactive" : undefined}
 >
+  {interactive && (
+    <defs>
+      <clipPath id="lc-sweep-clip">
+        <rect class="lc-sweep" x="0" y="0" width="960" height="190" />
+      </clipPath>
+    </defs>
+  )}
+
   <!-- month gridlines -->
   {
     Array.from({ length: 11 }, (_, i) => (
@@ -33,71 +46,238 @@ const { class: className } = Astro.props;
     ))
   }
 
-  <!-- savings gap: area between baseline and actual after the measure -->
-  <path
-    d="M600,73 C660,93 720,115 780,123 C840,131 900,143 960,147 L960,67 C900,63 840,77 780,70 C720,60 660,77 600,73 Z"
-    fill="var(--color-pine)"
-    fill-opacity="0.09"
-  />
+  <g clip-path={interactive ? "url(#lc-sweep-clip)" : undefined}>
+    <!-- savings gap: area between baseline and actual after the measure -->
+    <path
+      d="M600,73 C660,93 720,115 780,123 C840,131 900,143 960,147 L960,67 C900,63 840,77 780,70 C720,60 660,77 600,73 Z"
+      fill="var(--color-pine)"
+      fill-opacity="0.09"
+    />
 
-  <!-- weather-normalized baseline (dashed) -->
-  <path
-    d="M0,80 C80,65 160,95 240,77 C320,60 400,90 480,75 C540,67 570,70 600,73 C660,77 720,60 780,70 C840,77 900,63 960,67"
-    stroke="var(--color-muted)"
-    stroke-width="1.5"
-    stroke-dasharray="6 6"
-    stroke-opacity="0.55"
-  />
+    <!-- weather-normalized baseline (dashed) -->
+    <path
+      id="lc-baseline"
+      d="M0,80 C80,65 160,95 240,77 C320,60 400,90 480,75 C540,67 570,70 600,73 C660,77 720,60 780,70 C840,77 900,63 960,67"
+      stroke="var(--color-muted)"
+      stroke-width="1.5"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.55"
+    />
 
-  <!-- actual metered load (solid, pine — full strength, matches the CTA button) -->
-  <path
-    d="M0,80 C80,65 160,95 240,77 C320,60 400,90 480,75 C540,67 570,70 600,73 C660,93 720,115 780,123 C840,131 900,143 960,147"
-    stroke="var(--color-pine)"
-    stroke-width="2.5"
-  />
+    <!-- actual metered load (solid, pine — full strength, matches the CTA button) -->
+    <path
+      id="lc-actual"
+      d="M0,80 C80,65 160,95 240,77 C320,60 400,90 480,75 C540,67 570,70 600,73 C660,93 720,115 780,123 C840,131 900,143 960,147"
+      stroke="var(--color-pine)"
+      stroke-width="2.5"
+    />
 
-  <!-- measure-implemented marker -->
-  <line
-    x1="600"
-    y1="18"
-    x2="600"
-    y2="170"
-    stroke="var(--color-muted)"
-    stroke-width="1"
-    stroke-dasharray="2 4"
-    stroke-opacity="0.5"
-  />
-  <circle cx="600" cy="73" r="3.5" fill="var(--color-pine)"></circle>
+    <!-- measure-implemented marker -->
+    <line
+      x1="600"
+      y1="18"
+      x2="600"
+      y2="170"
+      stroke="var(--color-muted)"
+      stroke-width="1"
+      stroke-dasharray="2 4"
+      stroke-opacity="0.5"
+    />
+    <circle cx="600" cy="73" r="3.5" fill="var(--color-pine)"></circle>
+  </g>
 
   <!-- chart annotations -->
-  <text
-    x="610"
-    y="13"
-    font-family="var(--font-mono)"
-    font-size="11"
-    fill="var(--color-muted)"
-    letter-spacing="0.04em"
-  >
-    MEASURE IMPLEMENTED
-  </text>
-  <text
-    x="640"
-    y="47"
-    font-family="var(--font-mono)"
-    font-size="11"
-    fill="var(--color-muted)"
-    letter-spacing="0.04em"
-  >
-    WEATHER-NORMALIZED BASELINE
-  </text>
-  <text
-    x="700"
-    y="168"
-    font-family="var(--font-mono)"
-    font-size="11"
-    fill="var(--color-pine)"
-    letter-spacing="0.04em"
-  >
-    ACTUAL
-  </text>
+  <g class={interactive ? "lc-labels" : undefined}>
+    <text
+      x="610"
+      y="13"
+      font-family="var(--font-mono)"
+      font-size="11"
+      fill="var(--color-muted)"
+      letter-spacing="0.04em"
+    >
+      MEASURE IMPLEMENTED
+    </text>
+    <text
+      x="640"
+      y="62"
+      font-family="var(--font-mono)"
+      font-size="11"
+      fill="var(--color-muted)"
+      letter-spacing="0.04em"
+    >
+      WEATHER-NORMALIZED BASELINE
+    </text>
+    <text
+      x="700"
+      y="168"
+      font-family="var(--font-mono)"
+      font-size="11"
+      fill="var(--color-pine)"
+      letter-spacing="0.04em"
+    >
+      ACTUAL
+    </text>
+  </g>
+
+  {interactive && (
+    <g class="lc-crosshair" style="display: none">
+      <line
+        class="lc-xline"
+        x1="0"
+        y1="14"
+        x2="0"
+        y2="170"
+        stroke="var(--color-ink)"
+        stroke-width="1"
+        stroke-opacity="0.35"
+      />
+      <circle class="lc-dot-baseline" r="3.5" fill="var(--color-muted)" />
+      <circle class="lc-dot-actual" r="4" fill="var(--color-pine)" />
+      <g class="lc-tip">
+        <rect
+          class="lc-tip-bg"
+          rx="4"
+          fill="var(--color-ink)"
+          fill-opacity="0.92"
+        />
+        <text
+          class="lc-tip-text"
+          font-family="var(--font-mono)"
+          font-size="11"
+          letter-spacing="0.04em"
+          fill="#fcfcfa"
+        />
+      </g>
+    </g>
+  )}
 </svg>
+
+{
+  interactive && (
+    <style>
+      /* Draw-on-load sweep: the clip rect grows left to right, labels fade in. */
+      .lc-sweep {
+        width: 0;
+        animation: lc-sweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+      }
+      .lc-labels {
+        opacity: 0;
+        animation: lc-fade 0.6s ease-out 1.4s forwards;
+      }
+      @keyframes lc-sweep {
+        to {
+          width: 960px;
+        }
+      }
+      @keyframes lc-fade {
+        to {
+          opacity: 1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lc-sweep {
+          width: 960px;
+          animation: none;
+        }
+        .lc-labels {
+          opacity: 1;
+          animation: none;
+        }
+      }
+      svg.lc-interactive {
+        pointer-events: auto;
+        touch-action: pan-y;
+      }
+    </style>
+  )
+}
+
+{
+  interactive && (
+    <script>
+      const svg = document.querySelector('[data-loadcurve="interactive"]');
+      if (svg instanceof SVGSVGElement) {
+        const baseline = svg.querySelector("#lc-baseline") as SVGPathElement;
+        const actual = svg.querySelector("#lc-actual") as SVGPathElement;
+        const cross = svg.querySelector(".lc-crosshair") as SVGGElement;
+        const xline = svg.querySelector(".lc-xline") as SVGLineElement;
+        const dotB = svg.querySelector(".lc-dot-baseline") as SVGCircleElement;
+        const dotA = svg.querySelector(".lc-dot-actual") as SVGCircleElement;
+        const tip = svg.querySelector(".lc-tip") as SVGGElement;
+        const tipBg = svg.querySelector(".lc-tip-bg") as SVGRectElement;
+        const tipText = svg.querySelector(".lc-tip-text") as SVGTextElement;
+
+        // Walk each curve once (~480 points) into an x -> y table with linear
+        // interpolation between points. Lazy: built on first hover, not at load.
+        const sample = (path: SVGPathElement) => {
+          const len = path.getTotalLength();
+          const STEPS = 480;
+          const pts: { x: number; y: number }[] = [];
+          for (let i = 0; i <= STEPS; i++) {
+            const p = path.getPointAtLength((len * i) / STEPS);
+            pts.push({ x: p.x, y: p.y });
+          }
+          return (x: number) => {
+            let lo = 0;
+            let hi = pts.length - 1;
+            while (hi - lo > 1) {
+              const mid = (lo + hi) >> 1;
+              if (pts[mid].x < x) lo = mid;
+              else hi = mid;
+            }
+            const a = pts[lo];
+            const b = pts[hi];
+            const t = b.x === a.x ? 0 : (x - a.x) / (b.x - a.x);
+            return a.y + (b.y - a.y) * t;
+          };
+        };
+        let yB: ((x: number) => number) | null = null;
+        let yA: ((x: number) => number) | null = null;
+        const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        // Illustrative magnitude scale: value = ZERO_Y - y (chart y-axis is inverted)
+        const ZERO_Y = 400;
+
+        const onMove = (event: MouseEvent) => {
+          if (!yB || !yA) {
+            yB = sample(baseline);
+            yA = sample(actual);
+          }
+          const rect = svg.getBoundingClientRect();
+          const x = Math.round(
+            Math.min(959, Math.max(0, ((event.clientX - rect.left) / rect.width) * 960))
+          );
+          const yb = yB(x);
+          const ya = yA(x);
+          xline.setAttribute("x1", String(x));
+          xline.setAttribute("x2", String(x));
+          dotB.setAttribute("cx", String(x));
+          dotB.setAttribute("cy", String(yb));
+          dotA.setAttribute("cx", String(x));
+          dotA.setAttribute("cy", String(ya));
+
+          const month = MONTHS[Math.min(11, Math.floor((x / 960) * 12))];
+          const savings = Math.max(0, Math.round((1 - (ZERO_Y - ya) / (ZERO_Y - yb)) * 100));
+          tipText.textContent =
+            x < 600 ? `${month} · TRACKING BASELINE` : `${month} · SAVINGS ${savings}% VS BASELINE`;
+
+          const tw = tipText.getComputedTextLength() + 20;
+          const tx = Math.min(960 - tw - 4, Math.max(4, x - tw / 2));
+          const ty = Math.min(yb, ya) - 38;
+          tipBg.setAttribute("x", String(tx));
+          tipBg.setAttribute("y", String(Math.max(4, ty)));
+          tipBg.setAttribute("width", String(tw));
+          tipBg.setAttribute("height", "22");
+          tipText.setAttribute("x", String(tx + 10));
+          tipText.setAttribute("y", String(Math.max(4, ty) + 15));
+          cross.style.display = "";
+        };
+
+        svg.addEventListener("mousemove", onMove);
+        svg.addEventListener("mouseleave", () => {
+          cross.style.display = "none";
+        });
+      }
+    </script>
+  )
+}
