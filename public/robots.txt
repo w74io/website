@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /request/thanks
+
+Sitemap: https://www.w74.io/sitemap.xml
