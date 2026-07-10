@@ -50,9 +50,9 @@ const demos = [
       </p>
     </div>
     <LoadCurve
-      class="pointer-events-none mx-auto hidden w-full max-w-[1600px] opacity-70 md:-mt-5 md:block lg:-mt-8"
+      class="pointer-events-none mx-auto hidden w-full max-w-[1600px] opacity-70 md:mt-2 md:block"
     />
-    <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:-mt-5 md:pb-20">
+    <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:-mt-4 md:pb-20">
       <div class="mt-10 flex flex-wrap items-center gap-4 md:mt-0">
         <a
           href="/request"
@@ -75,7 +75,7 @@ const demos = [
           stats.map((stat, i) => (
             <div
               class="reveal flex flex-col-reverse"
-              style={`transition-delay: ${i * 90}ms`}
+              style={`transition-delay: ${i * 130}ms`}
             >
               <dt class="mt-2 font-mono text-xs tracking-wider text-muted uppercase">
                 {stat.label}
@@ -180,7 +180,7 @@ const demos = [
           demos.map((demo, i) => (
             <article
               class="reveal flex flex-col overflow-hidden rounded-lg border border-line bg-paper shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              style={`transition-delay: ${i * 90}ms`}
+              style={`transition-delay: ${i * 130}ms`}
             >
               <img
                 src={demo.image}
