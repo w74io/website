@@ -45,6 +45,32 @@ const navLinks = [
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Reveal-on-scroll: .js gates the hidden state so no-JS visitors see everything.
+      document.documentElement.classList.add("js");
+      window.addEventListener("DOMContentLoaded", () => {
+        const els = document.querySelectorAll(".reveal");
+        if (
+          !("IntersectionObserver" in window) ||
+          matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          els.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        els.forEach((el) => io.observe(el));
+      });
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <a
@@ -59,19 +85,22 @@ const navLinks = [
         aria-label="Main"
         class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6"
       >
-        <a
-          href="/"
-          class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-ink"
-          aria-label="W74 home"
-        >
+        <a href="/" class="flex items-center gap-3" aria-label="W74 home">
           <img
             src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark_green74.svg"
             alt=""
-            width="32"
-            height="32"
-            class="h-8 w-8"
+            width="36"
+            height="36"
+            class="h-9 w-9"
           />
-          W74
+          <span class="hidden flex-col leading-tight sm:flex">
+            <span class="text-sm font-medium text-ink">
+              Product &amp; Technology
+            </span>
+            <span class="font-mono text-xs text-muted">
+              Energy · Climate · AI
+            </span>
+          </span>
         </a>
         <div class="flex items-center gap-4 sm:gap-8">
           {
@@ -83,7 +112,7 @@ const navLinks = [
           }
           <a
             href="/request"
-            class="rounded-md bg-pine px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-pine-deep sm:px-4"
+            class="rounded-md bg-pine px-3 py-2 text-sm font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md sm:px-4"
           >
             Book an intro call
           </a>

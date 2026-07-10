@@ -20,7 +20,7 @@ const inputClasses =
     </p>
 
     {/* Plain iframe instead of Calendly's widget.js — keeps third-party JS off the page */}
-    <div class="mt-12 overflow-hidden rounded-lg border border-line">
+    <div class="mt-12 overflow-hidden rounded-lg border border-line shadow-sm">
       <iframe
         src="https://calendly.com/bradley-w74?embed_type=Inline&embed_domain=www.w74.io&hide_gdpr_banner=1"
         title="Schedule an intro call with W74 on Calendly"
@@ -89,7 +89,7 @@ const inputClasses =
         </div>
         <button
           type="submit"
-          class="rounded-md bg-pine px-8 py-3 font-medium text-white transition-colors hover:bg-pine-deep"
+          class="rounded-md bg-pine px-8 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
         >
           Send
         </button>
