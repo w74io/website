@@ -7,6 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://www.w74.io',
   trailingSlash: 'never',
+  build: {
+    format: 'file'
+  },
   vite: {
     plugins: [tailwindcss()]
   }
