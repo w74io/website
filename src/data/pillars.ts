@@ -25,7 +25,7 @@ export const pillars = [
       "ML-based IPMVP Option C M&V deployed across a $16B+ health system's 50+ properties.",
     ],
     links: [
-      { label: "View a sample M&V report (PDF) →", href: "/assets/sample-mv-report.pdf", external: false },
+      { label: "View a sample M&V report (PDF)", href: "/assets/sample-mv-report.pdf", external: false },
     ],
   },
   {
@@ -72,9 +72,9 @@ export const pillars = [
       "Built our own forecasting and M&V applications. Try them:",
     ],
     links: [
-      { label: "View a sample ECM summary (PDF) →", href: "/assets/sample-ecm-summary.pdf", external: false },
-      { label: "Energy Forecast App →", href: "https://w74-forecast.streamlit.app/", external: true },
-      { label: "M&V App →", href: "https://w74-energy.streamlit.app/", external: true },
+      { label: "View a sample ECM summary (PDF)", href: "/assets/sample-ecm-summary.pdf", external: false },
+      { label: "Energy Forecast App", href: "https://w74-forecast.streamlit.app/", external: true },
+      { label: "M&V App", href: "https://w74-energy.streamlit.app/", external: true },
     ],
   },
   {
