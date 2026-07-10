@@ -1,0 +1,102 @@
+---
+/**
+ * Signature element: an IPMVP-style M&V chart — dashed weather-normalized
+ * baseline vs. solid actual metered load, diverging after the measure is
+ * implemented; the shaded gap is the savings. Decorative only (aria-hidden).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 960 300"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  class={className}
+  preserveAspectRatio="xMidYMid meet"
+>
+  <!-- month gridlines -->
+  {
+    Array.from({ length: 11 }, (_, i) => (
+      <line
+        x1={(i + 1) * 80}
+        y1="40"
+        x2={(i + 1) * 80}
+        y2="270"
+        stroke="var(--color-line)"
+        stroke-width="1"
+      />
+    ))
+  }
+
+  <!-- savings gap: area between baseline and actual after the measure -->
+  <path
+    d="M360,140 C420,155 480,205 540,195 C600,185 660,215 720,205 C780,195 840,225 900,215 L960,212 L960,130 L900,135 C840,150 780,120 720,135 C660,150 600,120 540,140 C480,160 420,130 360,140 Z"
+    fill="var(--color-pine)"
+    fill-opacity="0.09"
+  />
+
+  <!-- weather-normalized baseline (dashed) -->
+  <path
+    d="M0,160 C60,140 120,180 180,150 C240,120 300,150 360,140 C420,130 480,160 540,140 C600,120 660,150 720,135 C780,120 840,150 900,135 L960,130"
+    stroke="var(--color-muted)"
+    stroke-width="1.5"
+    stroke-dasharray="6 6"
+    stroke-opacity="0.55"
+  />
+
+  <!-- actual metered load (solid, pine) -->
+  <path
+    d="M0,160 C60,140 120,180 180,150 C240,120 300,150 360,140 C420,155 480,205 540,195 C600,185 660,215 720,205 C780,195 840,225 900,215 L960,212"
+    stroke="var(--color-pine)"
+    stroke-width="2"
+  />
+
+  <!-- measure-implemented marker -->
+  <line
+    x1="360"
+    y1="52"
+    x2="360"
+    y2="268"
+    stroke="var(--color-muted)"
+    stroke-width="1"
+    stroke-dasharray="2 4"
+    stroke-opacity="0.5"
+  />
+  <circle cx="360" cy="140" r="3.5" fill="var(--color-pine)"></circle>
+
+  <!-- chart annotations -->
+  <text
+    x="370"
+    y="46"
+    font-family="var(--font-mono)"
+    font-size="11"
+    fill="var(--color-muted)"
+    letter-spacing="0.04em"
+  >
+    MEASURE IMPLEMENTED
+  </text>
+  <text
+    x="600"
+    y="106"
+    font-family="var(--font-mono)"
+    font-size="11"
+    fill="var(--color-muted)"
+    letter-spacing="0.04em"
+  >
+    WEATHER-NORMALIZED BASELINE
+  </text>
+  <text
+    x="600"
+    y="248"
+    font-family="var(--font-mono)"
+    font-size="11"
+    fill="var(--color-pine)"
+    letter-spacing="0.04em"
+  >
+    ACTUAL
+  </text>
+</svg>

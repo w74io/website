@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+/*
+  W74 design tokens — approved design plan.
+  Palette lifted from the W74 overview doc (W74_Overview_v11.html).
+*/
+@theme {
+  --color-paper: #fcfcfa; /* page background */
+  --color-ink: #15151c; /* headlines & body */
+  --color-pine: #2e7d52; /* the one accent */
+  --color-pine-deep: #235f3f; /* hover/active shade of pine */
+  --color-mist: #e9f2ec; /* tinted section backgrounds */
+  --color-muted: #5a5a66; /* secondary text */
+  --color-line: #e4e4ec; /* hairline borders */
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+}
+
+/* Space Grotesk — self-hosted variable font, one file covers 500 & 700 */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-var.woff2") format("woff2");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible focus states, sitewide */
+:focus-visible {
+  outline: 2px solid var(--color-pine);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

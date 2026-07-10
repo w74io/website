@@ -1,0 +1,123 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Set false on utility pages (e.g. form success) to keep them out of search. */
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const navLinks = [
+  { href: "/projects", label: "Projects" },
+  { href: "/team", label: "Team" },
+];
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <!-- TODO: replace placeholder favicon with the real W74 logo/favicon file -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="W74" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <!-- TODO: add a real OG image (1200x630 PNG) at /assets/og.png and uncomment:
+    <meta property="og:image" content={new URL("/assets/og.png", Astro.site)} />
+    -->
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2 focus:text-ink"
+    >
+      Skip to content
+    </a>
+
+    <header class="border-b border-line">
+      <nav
+        aria-label="Main"
+        class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6"
+      >
+        <a
+          href="/"
+          class="font-display text-xl font-bold tracking-tight text-ink"
+          aria-label="W74 home"
+        >
+          W74
+        </a>
+        <div class="flex items-center gap-4 sm:gap-8">
+          {
+            navLinks.map((link) => (
+              <a
+                href={link.href}
+                aria-current={currentPath === link.href ? "page" : undefined}
+                class:list={[
+                  "text-sm hover:text-ink",
+                  currentPath === link.href
+                    ? "font-medium text-ink"
+                    : "text-muted",
+                ]}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+          <a
+            href="/request"
+            class="rounded-md bg-pine px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-pine-deep sm:px-4"
+          >
+            Book an intro call
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="border-t border-line">
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-muted sm:px-6 md:flex-row md:items-center md:justify-between"
+      >
+        <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
+          <span>W74 Ventures LLC</span>
+          <span aria-hidden="true" class="hidden sm:inline">·</span>
+          <a href="mailto:info@w74.io" class="hover:text-ink">info@w74.io</a>
+          <span aria-hidden="true" class="hidden sm:inline">·</span>
+          {/* TODO: replace # with the W74 LinkedIn company URL */}
+          <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-ink">
+            LinkedIn
+          </a>
+          <span aria-hidden="true" class="hidden sm:inline">·</span>
+          {/* TODO: /assets/w74-overview.pdf is a placeholder file — replace with the real overview PDF */}
+          <a href="/assets/w74-overview.pdf" class="hover:text-ink">
+            Download the W74 overview (PDF)
+          </a>
+        </div>
+        <p>© 2026 W74 Ventures, LLC.</p>
+      </div>
+    </footer>
+  </body>
+</html>
