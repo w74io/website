@@ -2,10 +2,15 @@
   command = "npm run build"
   publish = "dist"
 
-# /projects merged into the homepage work section (July 2026)
+# /projects and /team merged into homepage sections (July 2026)
 [[redirects]]
   from = "/projects"
   to = "/#work"
+  status = 301
+
+[[redirects]]
+  from = "/team"
+  to = "/#team"
   status = 301
 
 [[headers]]

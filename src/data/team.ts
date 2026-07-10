@@ -1,7 +1,5 @@
----
-import Base from "../layouts/Base.astro";
-
-const team = [
+/** W74 team members, shown in the homepage #team section. Bios are final per BUILD_SPEC.md (Vinh added per Bradley, July 2026). */
+export const team = [
   {
     name: "Bradley Joseph",
     photo: "/assets/team/bradley-joseph.webp",
@@ -38,49 +36,3 @@ const team = [
     bio: "Vinh is the founding member of our Sales team. He has 5+ years of experience in sales and engineering and graduated from the University of Connecticut with a B.S. in Chemical Engineering.",
   },
 ];
----
-
-<Base
-  title="Team — W74"
-  description="The W74 team: energy, AI, and product leaders from Google, Meta, C3 AI, Accenture, MIT, and Stanford."
->
-  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-      Team
-    </h1>
-
-    <ul class="mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2">
-      {
-        team.map((member) => (
-          <li class="border-t border-line pt-8">
-            <div class="flex items-center gap-5">
-              <img
-                src={member.photo}
-                alt={`Headshot of ${member.name}`}
-                width="160"
-                height="160"
-                loading="lazy"
-                class="h-20 w-20 shrink-0 rounded-full border border-line object-cover"
-              />
-              <div>
-                <h2 class="font-display text-xl font-bold tracking-tight">
-                  {member.name}
-                </h2>
-                <p class="mt-1 text-muted">{member.role}</p>
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-1 inline-block text-sm font-medium text-pine hover:text-pine-deep"
-                >
-                  LinkedIn →
-                </a>
-              </div>
-            </div>
-            <p class="mt-6 text-muted">{member.bio}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</Base>

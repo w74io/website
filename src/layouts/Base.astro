@@ -13,9 +13,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
 const navLinks = [
   { href: "/#work", label: "Projects" },
-  { href: "/team", label: "Team" },
+  { href: "/#team", label: "Team" },
 ];
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
 <!doctype html>
@@ -77,16 +76,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
         <div class="flex items-center gap-4 sm:gap-8">
           {
             navLinks.map((link) => (
-              <a
-                href={link.href}
-                aria-current={currentPath === link.href ? "page" : undefined}
-                class:list={[
-                  "text-sm hover:text-ink",
-                  currentPath === link.href
-                    ? "font-medium text-ink"
-                    : "text-muted",
-                ]}
-              >
+              <a href={link.href} class="text-sm text-muted hover:text-ink">
                 {link.label}
               </a>
             ))
