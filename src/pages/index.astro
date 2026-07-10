@@ -34,9 +34,9 @@ const demos = [
   title="W74 — Product & Technology for Climate and Energy Companies"
   description="W74 partners with climate and energy companies to validate performance, reduce energy and OpEx, build better products, and accelerate growth — through fixed-scope projects or embedded fractional support."
 >
-  <!-- 1. Hero (load-curve band sits below the text in flow — no overlap) -->
+  <!-- 1. Hero (load-curve band sits between the sub text and the CTA row) -->
   <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 md:pt-32 md:pb-0">
+    <div class="mx-auto max-w-6xl px-4 pt-24 sm:px-6 md:pt-32">
       <h1
         class="max-w-3xl font-display text-4xl font-bold tracking-tight sm:text-6xl"
       >
@@ -48,10 +48,15 @@ const demos = [
         accelerate growth — as fixed-scope projects or embedded fractional
         support.
       </p>
-      <div class="mt-10 flex flex-wrap items-center gap-4">
+    </div>
+    <LoadCurve
+      class="pointer-events-none mx-auto hidden w-full max-w-[1600px] opacity-70 md:-mt-5 md:block lg:-mt-8"
+    />
+    <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:-mt-5 md:pb-20">
+      <div class="mt-10 flex flex-wrap items-center gap-4 md:mt-0">
         <a
           href="/request"
-          class="rounded-md bg-pine px-6 py-3 font-medium text-white transition-colors hover:bg-pine-deep"
+          class="rounded-md bg-pine px-6 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
         >
           Book an intro call
         </a>
@@ -60,9 +65,6 @@ const demos = [
         </a>
       </div>
     </div>
-    <LoadCurve
-      class="pointer-events-none mx-auto hidden w-full max-w-[1600px] opacity-70 md:-mt-12 md:block"
-    />
   </section>
 
   <!-- 2. Metrics bar -->
@@ -70,8 +72,11 @@ const demos = [
     <div class="mx-auto max-w-6xl px-4 py-14 sm:px-6">
       <dl class="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
         {
-          stats.map((stat) => (
-            <div class="flex flex-col-reverse">
+          stats.map((stat, i) => (
+            <div
+              class="reveal flex flex-col-reverse"
+              style={`transition-delay: ${i * 90}ms`}
+            >
               <dt class="mt-2 font-mono text-xs tracking-wider text-muted uppercase">
                 {stat.label}
               </dt>
@@ -107,7 +112,7 @@ const demos = [
           pillars.map((pillar) => (
             <article
               id={pillar.id}
-              class="grid scroll-mt-24 items-start gap-8 border-t border-line pt-10 md:grid-cols-[2fr_3fr] md:gap-12"
+              class="reveal grid scroll-mt-24 items-start gap-8 border-t border-line pt-10 md:grid-cols-[2fr_3fr] md:gap-12"
             >
               <img
                 src={pillar.thumb}
@@ -115,7 +120,7 @@ const demos = [
                 width="760"
                 height="440"
                 loading="lazy"
-                class="w-full rounded-lg border border-line bg-white"
+                class="w-full rounded-lg border border-line bg-white shadow-sm transition-shadow duration-300 hover:shadow-md"
               />
               <div>
                 <p class="font-mono text-sm text-indigo">{pillar.number}</p>
@@ -172,8 +177,11 @@ const demos = [
       <p class="mt-3 text-lg text-muted">Working demos, not slideware.</p>
       <div class="mt-12 grid gap-8 md:grid-cols-2">
         {
-          demos.map((demo) => (
-            <article class="flex flex-col overflow-hidden rounded-lg border border-line bg-paper">
+          demos.map((demo, i) => (
+            <article
+              class="reveal flex flex-col overflow-hidden rounded-lg border border-line bg-paper shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              style={`transition-delay: ${i * 90}ms`}
+            >
               <img
                 src={demo.image}
                 alt={demo.alt}
@@ -215,7 +223,7 @@ const demos = [
       <ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
         {
           team.map((member) => (
-            <li class="border-t border-line pt-8">
+            <li class="reveal border-t border-line pt-8">
               <div class="flex items-center gap-5">
                 <img
                   src={member.photo}
@@ -259,7 +267,7 @@ const demos = [
       <div class="flex flex-wrap items-center gap-6">
         <a
           href="/request"
-          class="rounded-md bg-pine px-6 py-3 font-medium text-white transition-colors hover:bg-pine-deep"
+          class="rounded-md bg-pine px-6 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
         >
           Book an intro call
         </a>
