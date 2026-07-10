@@ -1,6 +1,0 @@
-<!-- TODO: placeholder favicon — replace with the real W74 logo/favicon -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#2e7d52"/>
-  <path d="M10 34 C18 28 24 40 32 34 C38 30 42 36 54 30" stroke="#fcfcfa" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="2 6"/>
-  <path d="M10 42 C18 36 24 48 32 42 C38 48 42 52 54 48" stroke="#fcfcfa" stroke-width="4" fill="none" stroke-linecap="round"/>
-</svg>
