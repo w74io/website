@@ -77,6 +77,31 @@ const navLinks = [
           { threshold: 0.12, rootMargin: "0px 0px -80px 0px" }
         );
         els.forEach((el) => io.observe(el));
+
+        // Metrics count-up (e.g. $17M+ counts from $0M+) once scrolled into view
+        const counters = document.querySelectorAll("[data-countup]");
+        const cio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              cio.unobserve(entry.target);
+              const el = entry.target;
+              const m = el.textContent.trim().match(/^(\D*)(\d+)(.*)$/);
+              if (!m) return;
+              const target = parseInt(m[2], 10);
+              const start = performance.now();
+              const tick = (now) => {
+                const p = Math.min((now - start) / 1200, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = m[1] + Math.round(target * eased) + m[3];
+                if (p < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+            });
+          },
+          { threshold: 0.5 }
+        );
+        counters.forEach((el) => cio.observe(el));
       });
     </script>
   </head>
@@ -95,7 +120,7 @@ const navLinks = [
       >
         <a href="/" class="flex items-center gap-3" aria-label="W74 home">
           <img
-            src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark_green74.svg"
+            src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark.svg"
             alt=""
             width="36"
             height="36"
@@ -133,28 +158,57 @@ const navLinks = [
     </main>
 
     <footer class="border-t border-line">
-      <div
-        class="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-muted sm:px-6 md:flex-row md:items-center md:justify-between"
-      >
-        <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
-          <span>W74 Ventures LLC</span>
-          <span aria-hidden="true" class="hidden sm:inline">·</span>
-          <a href="mailto:info@w74.io" class="hover:text-ink">info@w74.io</a>
-          <span aria-hidden="true" class="hidden sm:inline">·</span>
-          <a
-            href="https://www.linkedin.com/company/w74-advisors/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-ink"
-          >
-            LinkedIn
+      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <div
+          class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"
+        >
+          <a href="/" class="flex items-center gap-3" aria-label="W74 home">
+            <img
+              src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark.svg"
+              alt=""
+              width="36"
+              height="36"
+              class="h-9 w-9"
+            />
+            <span class="flex flex-col leading-tight">
+              <span class="text-sm font-medium text-ink">
+                Product &amp; Technology
+              </span>
+              <span class="font-mono text-xs text-muted">
+                Energy · Climate · AI
+              </span>
+            </span>
           </a>
-          <span aria-hidden="true" class="hidden sm:inline">·</span>
-          <a href="/assets/w74-overview.pdf" class="hover:text-ink">
-            Download the W74 overview (PDF)
-          </a>
+          <nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            <a href="/#work" class="text-muted hover:text-ink">Projects</a>
+            <a href="/#team" class="text-muted hover:text-ink">Team</a>
+            <a href="/request" class="text-muted hover:text-ink">
+              Book an intro call
+            </a>
+            <a href="/assets/w74-overview.pdf" class="text-muted hover:text-ink">
+              Download the W74 overview (PDF)
+            </a>
+          </nav>
         </div>
-        <p>© 2026 W74 Ventures, LLC.</p>
+        <div
+          class="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span>W74 Ventures LLC</span>
+            <span aria-hidden="true">·</span>
+            <a href="mailto:info@w74.io" class="hover:text-ink">info@w74.io</a>
+            <span aria-hidden="true">·</span>
+            <a
+              href="https://www.linkedin.com/company/w74-advisors/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-ink"
+            >
+              LinkedIn<span class="text-indigo" aria-hidden="true">&nbsp;↗</span>
+            </a>
+          </div>
+          <p>© 2026 W74 Ventures, LLC.</p>
+        </div>
       </div>
     </footer>
   </body>

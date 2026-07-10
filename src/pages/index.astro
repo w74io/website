@@ -79,6 +79,7 @@ const demos = [
                 {stat.label}
               </dt>
               <dd
+                data-countup
                 class:list={[
                   "font-display text-4xl font-bold tracking-tight sm:text-5xl",
                   stat.color,
@@ -157,24 +158,19 @@ const demos = [
           ))
         }
       </div>
-      <div class="mt-14 border-t border-line pt-6">
-        <p class="font-mono text-xs text-muted">
-          † Work led by W74 team members at Accenture, prior to W74.
-        </p>
-        <p class="mt-2 font-mono text-xs text-muted">
-          References &amp; introductions available on request.
-        </p>
-      </div>
     </div>
   </section>
 
   <!-- 4. Try what we build -->
   <section class="border-y border-line bg-mist">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-      <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      <p class="font-mono text-xs font-medium tracking-widest text-pine uppercase">
+        Demos
+      </p>
+      <h2 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
         Try what we build
       </h2>
-      <p class="mt-3 text-lg text-muted">Working demos, not slideware.</p>
+      <p class="mt-4 text-lg text-muted">Working demos, not slideware.</p>
       <div class="mt-12 grid gap-8 md:grid-cols-2">
         {
           demos.map((demo, i) => (
@@ -219,8 +215,10 @@ const demos = [
   <!-- 5. Team -->
   <section id="team" class="scroll-mt-24">
     <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-      <p class="font-mono text-xs tracking-widest text-muted uppercase">Team</p>
-      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      <p class="font-mono text-xs font-medium tracking-widest text-pine uppercase">
+        Team
+      </p>
+      <h2 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
         W74 Team
       </h2>
       <ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
@@ -266,9 +264,18 @@ const demos = [
     <div
       class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 sm:px-6 md:flex-row md:items-center md:justify-between"
     >
-      <h2 class="font-display text-3xl font-bold tracking-tight text-white">
-        Ready to get started?
-      </h2>
+      <div class="flex items-center gap-4">
+        <img
+          src="/assets/W74_Logo_Kit_v02/svg/w74_mark_transparent_white.svg"
+          alt=""
+          width="40"
+          height="40"
+          class="h-10 w-10"
+        />
+        <h2 class="font-display text-3xl font-bold tracking-tight text-white">
+          Ready to get started?
+        </h2>
+      </div>
       <div class="flex flex-wrap items-center gap-6">
         <a
           href="/request"
