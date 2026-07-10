@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = "dist"
 
+# /projects merged into the homepage work section (July 2026)
+[[redirects]]
+  from = "/projects"
+  to = "/#work"
+  status = 301
+
 [[headers]]
   for = "/fonts/*"
   [headers.values]

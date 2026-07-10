@@ -12,6 +12,9 @@
   --color-mist: #e9f2ec; /* tinted section backgrounds */
   --color-muted: #5a5a66; /* secondary text */
   --color-line: #e4e4ec; /* hairline borders */
+  /* stat colors from the W74 overview doc (metrics bar + pillar numbers only) */
+  --color-indigo: #4338ca;
+  --color-amber: #c2710f;
 
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,

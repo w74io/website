@@ -12,7 +12,7 @@ const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 const navLinks = [
-  { href: "/projects", label: "Projects" },
+  { href: "/#work", label: "Projects" },
   { href: "/team", label: "Team" },
 ];
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
