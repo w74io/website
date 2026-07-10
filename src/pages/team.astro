@@ -1,0 +1,78 @@
+---
+import Base from "../layouts/Base.astro";
+
+/* TODO: replace initials avatars with real headshots (4) when provided */
+const team = [
+  {
+    name: "Bradley Joseph",
+    initials: "BJ",
+    role: "Founder & CEO",
+    linkedin: "https://www.linkedin.com/in/bradleyjosephv/",
+    bio: "Bradley has spent 17+ years helping companies build energy-centric products and technology. His experience includes leadership roles at Google Sidewalk Labs, C3 AI, Accenture, BlocPower, and Carbon Lighthouse, spanning AI, building decarbonization, and energy analytics. He holds an M.S. in Building Technology with a focus on Machine Learning from MIT and a B.S. in Mechanical Engineering with a concentration in Power Generation from the University of Illinois Urbana-Champaign.",
+  },
+  {
+    name: "Michael Ashida",
+    initials: "MA",
+    role: "Partner",
+    linkedin: "https://www.linkedin.com/in/michaelashida/",
+    bio: "Michael is a Climate Tech leader with 10+ years of experience helping tech companies develop, manage, and scale their climate products and sustainability initiatives. His professional work includes time with Meta's Climate Product team, GitHub, and Accenture Smart Buildings. He holds an MBA from the University of Chicago's Booth School of Business and a B.S. in Mechanical Engineering from the University of Illinois Urbana-Champaign.",
+  },
+  {
+    name: "Mike Jermann",
+    initials: "MJ",
+    role: "AI Advisor",
+    linkedin: "https://www.linkedin.com/in/mjermann/",
+    bio: "Mike is a Sr. Machine Learning Engineer at a Silicon Valley tech company with deep expertise in Data Analytics and Software Engineering. Previously, he worked at Google, Uptake, and Venmo. He graduated with an M.S. in Computer Science from Stanford and holds a B.S. in Electrical Engineering.",
+  },
+  {
+    name: "James Guo",
+    initials: "JG",
+    role: "Data Scientist",
+    linkedin: "https://www.linkedin.com/in/zhongyi-guo/",
+    bio: "James is a data scientist building next-generation models for energy systems. Prior to W74, he worked as a biomedical researcher in academia, applying machine learning and data visualization techniques to identify patterns and data-driven insights. He holds a B.S. in Statistics and Biology from Cornell University and an M.S. in Epidemiology and Clinical Research from Stanford University.",
+  },
+];
+---
+
+<Base
+  title="Team — W74"
+  description="The W74 team: energy, AI, and product leaders from Google, Meta, C3 AI, Accenture, MIT, and Stanford."
+>
+  <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Team
+    </h1>
+
+    <ul class="mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2">
+      {
+        team.map((member) => (
+          <li class="border-t border-line pt-8">
+            <div class="flex items-center gap-5">
+              <div
+                aria-hidden="true"
+                class="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-mist font-display text-2xl font-bold text-pine"
+              >
+                {member.initials}
+              </div>
+              <div>
+                <h2 class="font-display text-xl font-bold tracking-tight">
+                  {member.name}
+                </h2>
+                <p class="mt-1 text-muted">{member.role}</p>
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-1 inline-block text-sm font-medium text-pine hover:text-pine-deep"
+                >
+                  LinkedIn →
+                </a>
+              </div>
+            </div>
+            <p class="mt-6 text-muted">{member.bio}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
