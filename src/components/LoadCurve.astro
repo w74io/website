@@ -2,7 +2,8 @@
 /**
  * Signature element: an IPMVP-style M&V chart — dashed weather-normalized
  * baseline vs. solid actual metered load, diverging after the measure is
- * implemented; the shaded gap is the savings. Decorative only (aria-hidden).
+ * implemented; the shaded gap is the savings. Rendered as a flat band below
+ * the hero text (never behind it). Decorative only (aria-hidden).
  */
 interface Props {
   class?: string;
@@ -11,7 +12,7 @@ const { class: className } = Astro.props;
 ---
 
 <svg
-  viewBox="0 0 960 300"
+  viewBox="0 0 960 220"
   fill="none"
   xmlns="http://www.w3.org/2000/svg"
   aria-hidden="true"
@@ -23,9 +24,9 @@ const { class: className } = Astro.props;
     Array.from({ length: 11 }, (_, i) => (
       <line
         x1={(i + 1) * 80}
-        y1="40"
+        y1="30"
         x2={(i + 1) * 80}
-        y2="270"
+        y2="195"
         stroke="var(--color-line)"
         stroke-width="1"
       />
@@ -34,14 +35,14 @@ const { class: className } = Astro.props;
 
   <!-- savings gap: area between baseline and actual after the measure -->
   <path
-    d="M600,138 C660,165 720,195 780,205 C840,215 900,235 960,238 L960,132 C900,125 840,148 780,135 C720,120 660,145 600,138 Z"
+    d="M600,88 C660,108 720,130 780,138 C840,146 900,158 960,162 L960,82 C900,78 840,92 780,85 C720,75 660,92 600,88 Z"
     fill="var(--color-pine)"
     fill-opacity="0.09"
   />
 
   <!-- weather-normalized baseline (dashed) -->
   <path
-    d="M0,150 C80,130 160,170 240,145 C320,120 400,160 480,140 C540,128 570,132 600,138 C660,145 720,120 780,135 C840,148 900,125 960,132"
+    d="M0,95 C80,80 160,110 240,92 C320,75 400,105 480,90 C540,82 570,85 600,88 C660,92 720,75 780,85 C840,92 900,78 960,82"
     stroke="var(--color-muted)"
     stroke-width="1.5"
     stroke-dasharray="6 6"
@@ -50,7 +51,7 @@ const { class: className } = Astro.props;
 
   <!-- actual metered load (solid, pine) -->
   <path
-    d="M0,150 C80,130 160,170 240,145 C320,120 400,160 480,140 C540,128 570,132 600,138 C660,165 720,195 780,205 C840,215 900,235 960,238"
+    d="M0,95 C80,80 160,110 240,92 C320,75 400,105 480,90 C540,82 570,85 600,88 C660,108 720,130 780,138 C840,146 900,158 960,162"
     stroke="var(--color-pine)"
     stroke-width="2"
   />
@@ -58,20 +59,20 @@ const { class: className } = Astro.props;
   <!-- measure-implemented marker -->
   <line
     x1="600"
-    y1="52"
+    y1="34"
     x2="600"
-    y2="268"
+    y2="195"
     stroke="var(--color-muted)"
     stroke-width="1"
     stroke-dasharray="2 4"
     stroke-opacity="0.5"
   />
-  <circle cx="600" cy="138" r="3.5" fill="var(--color-pine)"></circle>
+  <circle cx="600" cy="88" r="3.5" fill="var(--color-pine)"></circle>
 
   <!-- chart annotations -->
   <text
     x="610"
-    y="46"
+    y="28"
     font-family="var(--font-mono)"
     font-size="11"
     fill="var(--color-muted)"
@@ -81,7 +82,7 @@ const { class: className } = Astro.props;
   </text>
   <text
     x="640"
-    y="112"
+    y="62"
     font-family="var(--font-mono)"
     font-size="11"
     fill="var(--color-muted)"
@@ -91,7 +92,7 @@ const { class: className } = Astro.props;
   </text>
   <text
     x="700"
-    y="262"
+    y="185"
     font-family="var(--font-mono)"
     font-size="11"
     fill="var(--color-pine)"
