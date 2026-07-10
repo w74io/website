@@ -115,7 +115,9 @@ const navLinks = [
       Skip to content
     </a>
 
-    <header class="border-b border-line">
+    <header
+      class="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur"
+    >
       <nav
         aria-label="Main"
         class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6"
@@ -149,7 +151,7 @@ const navLinks = [
             href="/request"
             class="rounded-md bg-pine px-3 py-2 text-sm font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md sm:px-4"
           >
-            Book an intro call
+            Book an intro
           </a>
         </div>
       </nav>
@@ -167,63 +169,17 @@ const navLinks = [
               <p class="font-display text-3xl font-bold tracking-tight text-white">
                 Ready to get started?
               </p>
-              <div class="flex flex-wrap items-center gap-6">
-                <a
-                  href="/request"
-                  class="rounded-md bg-pine px-6 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
-                >
-                  Book an intro call
-                </a>
-                <a
-                  href="mailto:info@w74.io"
-                  class="text-lg text-mist hover:text-white"
-                >
-                  info@w74.io
-                </a>
-              </div>
+              <a
+                href="mailto:info@w74.io"
+                class="text-lg text-mist hover:text-white"
+              >
+                info@w74.io
+              </a>
             </div>
           )
         }
         <div
-          class="flex flex-col gap-8 py-10 md:flex-row md:items-center md:justify-between"
-        >
-          <a
-            href="/"
-            class="flex items-center gap-3"
-            aria-label="W74 home — Product &amp; Technology: Energy, Climate, AI"
-          >
-            <img
-              src="/assets/W74_Logo_Kit_v02/svg/w74_mark_transparent_white.svg"
-              alt=""
-              width="36"
-              height="36"
-              class="h-9 w-9"
-            />
-            <span class="flex flex-col leading-tight">
-              <span class="text-sm font-medium text-white">
-                Product &amp; Technology
-              </span>
-              <span class="font-mono text-xs text-mist/70">
-                Energy · Climate · AI
-              </span>
-            </span>
-          </a>
-          <nav
-            aria-label="Footer"
-            class="flex flex-wrap gap-x-6 gap-y-2 text-sm"
-          >
-            <a href="/#work" class="text-mist/80 hover:text-white">Projects</a>
-            <a href="/#team" class="text-mist/80 hover:text-white">Team</a>
-            <a
-              href="/assets/w74-overview.pdf"
-              class="text-mist/80 hover:text-white"
-            >
-              Download the W74 overview (PDF)
-            </a>
-          </nav>
-        </div>
-        <div
-          class="flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-mist/70 sm:flex-row sm:items-center sm:justify-between"
+          class="flex flex-col gap-2 py-6 text-sm text-mist/70 sm:flex-row sm:items-center sm:justify-between"
         >
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span>W74 Ventures LLC</span>
@@ -239,6 +195,10 @@ const navLinks = [
               class="hover:text-white"
             >
               LinkedIn<span aria-hidden="true">&nbsp;↗</span>
+            </a>
+            <span aria-hidden="true">·</span>
+            <a href="/assets/w74-overview.pdf" class="hover:text-white">
+              Download the W74 overview (PDF)
             </a>
           </div>
           <p>© 2026 W74 Ventures, LLC.</p>
