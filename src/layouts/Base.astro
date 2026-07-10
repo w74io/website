@@ -27,7 +27,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="preload"
       href="/fonts/space-grotesk-var.woff2"
@@ -40,9 +41,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <!-- TODO: add a real OG image (1200x630 PNG) at /assets/og.png and uncomment:
     <meta property="og:image" content={new URL("/assets/og.png", Astro.site)} />
-    -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body class="flex min-h-screen flex-col">
@@ -60,9 +62,16 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
       >
         <a
           href="/"
-          class="font-display text-xl font-bold tracking-tight text-ink"
+          class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-ink"
           aria-label="W74 home"
         >
+          <img
+            src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark_green74.svg"
+            alt=""
+            width="32"
+            height="32"
+            class="h-8 w-8"
+          />
           W74
         </a>
         <div class="flex items-center gap-4 sm:gap-8">
@@ -105,8 +114,12 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
           <span aria-hidden="true" class="hidden sm:inline">·</span>
           <a href="mailto:info@w74.io" class="hover:text-ink">info@w74.io</a>
           <span aria-hidden="true" class="hidden sm:inline">·</span>
-          {/* TODO: replace # with the W74 LinkedIn company URL */}
-          <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-ink">
+          <a
+            href="https://www.linkedin.com/company/w74-advisors/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-ink"
+          >
             LinkedIn
           </a>
           <span aria-hidden="true" class="hidden sm:inline">·</span>
