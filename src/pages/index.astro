@@ -36,7 +36,7 @@ const demos = [
 >
   <!-- 1. Hero (load-curve band sits between the sub text and the CTA row) -->
   <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-4 pt-12 sm:px-6 md:pt-16">
+    <div class="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 md:pt-16 md:pb-0">
       <h1 class="font-display text-4xl font-bold tracking-tight sm:text-6xl">
         Accelerate your climate work
       </h1>
@@ -46,16 +46,11 @@ const demos = [
         accelerate growth.
       </p>
     </div>
+    {/* Remove `interactive` to fall back to the static chart */}
     <LoadCurve
-      class="pointer-events-none mx-auto hidden w-full max-w-[1600px] md:mt-2 md:block"
+      interactive
+      class="mx-auto hidden w-full max-w-[1600px] md:mt-2 md:mb-8 md:block"
     />
-    <div class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 md:-mt-4 md:pb-20">
-      <div class="mt-10 md:mt-0">
-        <a href="#work" class="font-medium text-pine hover:text-pine-deep">
-          See our work<span class="text-indigo" aria-hidden="true">&nbsp;↗</span>
-        </a>
-      </div>
-    </div>
   </section>
 
   <!-- 2. Metrics bar -->
@@ -252,34 +247,5 @@ const demos = [
     </div>
   </section>
 
-  <!-- 6. Closing CTA band -->
-  <section class="border-t border-line bg-ink">
-    <div
-      class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 sm:px-6 md:flex-row md:items-center md:justify-between"
-    >
-      <div class="flex items-center gap-4">
-        <img
-          src="/assets/W74_Logo_Kit_v02/svg/w74_mark_transparent_white.svg"
-          alt=""
-          width="40"
-          height="40"
-          class="h-10 w-10"
-        />
-        <h2 class="font-display text-3xl font-bold tracking-tight text-white">
-          Ready to get started?
-        </h2>
-      </div>
-      <div class="flex flex-wrap items-center gap-6">
-        <a
-          href="/request"
-          class="rounded-md bg-pine px-6 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
-        >
-          Book an intro call
-        </a>
-        <a href="mailto:info@w74.io" class="text-lg text-mist hover:text-white">
-          info@w74.io
-        </a>
-      </div>
-    </div>
-  </section>
+  {/* Closing CTA now lives in the dark footer (Base.astro) */}
 </Base>

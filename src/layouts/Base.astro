@@ -6,9 +6,11 @@ interface Props {
   description: string;
   /** Set false on utility pages (e.g. form success) to keep them out of search. */
   noindex?: boolean;
+  /** Set false to omit the "Ready to get started?" row from the dark footer (e.g. on /request itself). */
+  cta?: boolean;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, cta = true } = Astro.props;
 // Strip build-format artifacts (/index.html, .html) so canonical/OG URLs
 // match the clean URLs Netlify actually serves.
 const cleanPath =
@@ -157,54 +159,86 @@ const navLinks = [
       <slot />
     </main>
 
-    <footer class="border-t border-line">
-      <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <footer class="bg-ink">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        {
+          cta && (
+            <div class="flex flex-col items-start gap-6 border-b border-white/10 py-14 md:flex-row md:items-center md:justify-between">
+              <p class="font-display text-3xl font-bold tracking-tight text-white">
+                Ready to get started?
+              </p>
+              <div class="flex flex-wrap items-center gap-6">
+                <a
+                  href="/request"
+                  class="rounded-md bg-pine px-6 py-3 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
+                >
+                  Book an intro call
+                </a>
+                <a
+                  href="mailto:info@w74.io"
+                  class="text-lg text-mist hover:text-white"
+                >
+                  info@w74.io
+                </a>
+              </div>
+            </div>
+          )
+        }
         <div
-          class="flex flex-col gap-8 md:flex-row md:items-center md:justify-between"
+          class="flex flex-col gap-8 py-10 md:flex-row md:items-center md:justify-between"
         >
-          <a href="/" class="flex items-center gap-3" aria-label="W74 home — Product &amp; Technology: Energy, Climate, AI">
+          <a
+            href="/"
+            class="flex items-center gap-3"
+            aria-label="W74 home — Product &amp; Technology: Energy, Climate, AI"
+          >
             <img
-              src="/assets/W74_Logo_Kit_v02/svg/w74_mark_dark.svg"
+              src="/assets/W74_Logo_Kit_v02/svg/w74_mark_transparent_white.svg"
               alt=""
               width="36"
               height="36"
               class="h-9 w-9"
             />
             <span class="flex flex-col leading-tight">
-              <span class="text-sm font-medium text-ink">
+              <span class="text-sm font-medium text-white">
                 Product &amp; Technology
               </span>
-              <span class="font-mono text-xs text-muted">
+              <span class="font-mono text-xs text-mist/70">
                 Energy · Climate · AI
               </span>
             </span>
           </a>
-          <nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            <a href="/#work" class="text-muted hover:text-ink">Projects</a>
-            <a href="/#team" class="text-muted hover:text-ink">Team</a>
-            <a href="/request" class="text-muted hover:text-ink">
-              Book an intro call
-            </a>
-            <a href="/assets/w74-overview.pdf" class="text-muted hover:text-ink">
+          <nav
+            aria-label="Footer"
+            class="flex flex-wrap gap-x-6 gap-y-2 text-sm"
+          >
+            <a href="/#work" class="text-mist/80 hover:text-white">Projects</a>
+            <a href="/#team" class="text-mist/80 hover:text-white">Team</a>
+            <a
+              href="/assets/w74-overview.pdf"
+              class="text-mist/80 hover:text-white"
+            >
               Download the W74 overview (PDF)
             </a>
           </nav>
         </div>
         <div
-          class="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between"
+          class="flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-mist/70 sm:flex-row sm:items-center sm:justify-between"
         >
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span>W74 Ventures LLC</span>
             <span aria-hidden="true">·</span>
-            <a href="mailto:info@w74.io" class="hover:text-ink">info@w74.io</a>
+            <a href="mailto:info@w74.io" class="hover:text-white">
+              info@w74.io
+            </a>
             <span aria-hidden="true">·</span>
             <a
               href="https://www.linkedin.com/company/w74-advisors/"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-ink"
+              class="hover:text-white"
             >
-              LinkedIn<span class="text-indigo" aria-hidden="true">&nbsp;↗</span>
+              LinkedIn<span aria-hidden="true">&nbsp;↗</span>
             </a>
           </div>
           <p>© 2026 W74 Ventures, LLC.</p>
