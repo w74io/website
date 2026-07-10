@@ -3,11 +3,12 @@ import Base from "../layouts/Base.astro";
 import LoadCurve from "../components/LoadCurve.astro";
 import { pillars } from "../data/pillars";
 
+/* Stat colors match the W74 overview doc's metrics bar */
 const stats = [
-  { value: "$17M+", label: "Energy savings delivered" },
-  { value: "200+", label: "Properties analyzed & monitored" },
-  { value: "$8M+", label: "Revenue growth driven" },
-  { value: "$150M+", label: "Venture financing supported" },
+  { value: "$17M+", label: "Energy savings delivered", color: "text-pine" },
+  { value: "200+", label: "Properties analyzed & monitored", color: "text-ink" },
+  { value: "$8M+", label: "Revenue growth driven", color: "text-amber" },
+  { value: "$150M+", label: "Venture financing supported", color: "text-indigo" },
 ];
 
 const demos = [
@@ -56,7 +57,7 @@ const demos = [
         >
           Book an intro call
         </a>
-        <a href="/projects" class="font-medium text-pine hover:text-pine-deep">
+        <a href="#work" class="font-medium text-pine hover:text-pine-deep">
           See our work →
         </a>
       </div>
@@ -73,7 +74,12 @@ const demos = [
               <dt class="mt-2 font-mono text-xs tracking-wider text-muted uppercase">
                 {stat.label}
               </dt>
-              <dd class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+              <dd
+                class:list={[
+                  "font-display text-4xl font-bold tracking-tight sm:text-5xl",
+                  stat.color,
+                ]}
+              >
                 {stat.value}
               </dd>
             </div>
@@ -86,36 +92,73 @@ const demos = [
     </div>
   </section>
 
-  <!-- 3. What we do — four pillars -->
-  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-    <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-      What we do
-    </h2>
-    <div class="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
-      {
-        pillars.map((pillar) => (
-          <article class="border-t border-line pt-6">
-            <p class="font-mono text-sm text-pine">{pillar.number}</p>
-            <h3 class="mt-3 font-display text-2xl font-bold tracking-tight">
-              {pillar.title}
-            </h3>
-            <p class="mt-3 text-muted">{pillar.blurb}</p>
-            <ul class="mt-5 flex flex-wrap gap-2" aria-label="Capabilities">
-              {pillar.chips.map((chip) => (
-                <li class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted">
-                  {chip}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={`/projects#${pillar.id}`}
-              class="mt-5 inline-block font-medium text-pine hover:text-pine-deep"
+  <!-- 3. What we do — four pillars with case studies (W74-overview format) -->
+  <section id="work" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <p class="font-mono text-xs tracking-widest text-muted uppercase">
+        What we do
+      </p>
+      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        Four kinds of problems we solve
+      </h2>
+      <div class="mt-14 space-y-16">
+        {
+          pillars.map((pillar) => (
+            <article
+              id={pillar.id}
+              class="grid scroll-mt-24 items-start gap-8 border-t border-line pt-10 md:grid-cols-[2fr_3fr] md:gap-12"
             >
-              See the work →
-            </a>
-          </article>
-        ))
-      }
+              <img
+                src={pillar.thumb}
+                alt={pillar.thumbAlt}
+                width="760"
+                height="440"
+                loading="lazy"
+                class="w-full rounded-lg border border-line bg-white"
+              />
+              <div>
+                <p class="font-mono text-sm text-indigo">{pillar.number}</p>
+                <h3 class="mt-2 font-display text-2xl font-bold tracking-tight">
+                  {pillar.title}
+                </h3>
+                <p class="mt-3 font-mono text-xs leading-relaxed text-muted">
+                  {pillar.chips.join(" · ")}
+                </p>
+                <p class="mt-5 font-mono text-xs font-medium tracking-wider text-pine uppercase">
+                  {pillar.clients}
+                </p>
+                {pillar.cases.map((text) => (
+                  <p class="mt-3 text-muted">{text}</p>
+                ))}
+                {pillar.links.length > 0 && (
+                  <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+                    {pillar.links.map((link) => (
+                      <li>
+                        <a
+                          href={link.href}
+                          target={link.external ? "_blank" : undefined}
+                          rel={link.external ? "noopener noreferrer" : undefined}
+                          class="text-sm font-medium text-pine hover:text-pine-deep"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-14 border-t border-line pt-6">
+        <p class="font-mono text-xs text-muted">
+          † Work led by W74 team members at Accenture, prior to W74.
+        </p>
+        <p class="mt-2 font-mono text-xs text-muted">
+          References &amp; introductions available on request.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -159,47 +202,9 @@ const demos = [
     </div>
   </section>
 
-  <!-- 5. How we work -->
-  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-    <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-      How we work
-    </h2>
-    <p class="mt-3 text-lg text-muted">We take on work in two shapes.</p>
-    <div class="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
-      <article class="border-t border-line pt-6">
-        <h3 class="font-display text-xl font-bold tracking-tight">
-          Fixed-scope projects
-        </h3>
-        <p class="mt-3 text-muted">
-          You bring a defined problem; we deliver a defined outcome — scoped,
-          priced, and run independently. That's how we built Bedrock Energy's
-          performance validation framework, and why they've kept us on for
-          ongoing monitoring.
-        </p>
-      </article>
-      <article class="border-t border-line pt-6">
-        <h3 class="font-display text-xl font-bold tracking-tight">
-          Embedded fractional support
-        </h3>
-        <p class="mt-3 text-muted">
-          We join your team as fractional product and engineering leadership,
-          and the work moves with your priorities. At Jane Energy, that's meant
-          everything from training and building ML models to identifying energy
-          conservation measures (ECMs) for their customers as part of pilot
-          delivery.
-        </p>
-      </article>
-    </div>
-    {/* TODO: confirm timing promises (couple of weeks / weekly cadence) before launch */}
-    <p class="mt-12 max-w-3xl text-muted">
-      Both start the same way: a conversation with your team, a review of your
-      docs and data, and a scoped proposal — usually within a couple of weeks.
-      From kickoff, you get a standing weekly cadence and direct access to the
-      people doing the work.
-    </p>
-  </section>
+  {/* "How we work" section removed 2026-07-10 — Bradley is rewriting it; restore from git history when new copy lands */}
 
-  <!-- 6. Closing CTA band -->
+  <!-- 5. Closing CTA band -->
   <section class="border-t border-line bg-ink">
     <div
       class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-16 sm:px-6 md:flex-row md:items-center md:justify-between"
