@@ -1,0 +1,10 @@
+<!-- TODO: placeholder — replace with a real screenshot of the Energy Forecast App (https://w74-forecast.streamlit.app/) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#e9f2ec"/>
+  <rect x="40" y="40" width="720" height="60" rx="8" fill="#fcfcfa" stroke="#e4e4ec"/>
+  <rect x="40" y="120" width="460" height="290" rx="8" fill="#fcfcfa" stroke="#e4e4ec"/>
+  <rect x="520" y="120" width="240" height="290" rx="8" fill="#fcfcfa" stroke="#e4e4ec"/>
+  <path d="M70 340 C150 300 200 360 280 310 C340 275 400 320 470 260" stroke="#2e7d52" stroke-width="3" fill="none"/>
+  <text x="400" y="230" text-anchor="middle" font-family="monospace" font-size="24" fill="#5a5a66">TODO: Energy Forecast App</text>
+  <text x="400" y="260" text-anchor="middle" font-family="monospace" font-size="24" fill="#5a5a66">screenshot</text>
+</svg>
