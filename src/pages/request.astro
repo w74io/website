@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+
+const inputClasses =
+  "mt-2 w-full rounded-md border border-line bg-paper px-4 py-3 text-ink placeholder:text-muted/70 focus:border-pine";
+---
+
+<Base
+  title="Book an intro call — W74"
+  description="Start a conversation with W74 — a 30-minute intro call to scope what you're trying to prove or ship."
+>
+  <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-28">
+    <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+      Book an intro call
+    </h1>
+    <p class="mt-4 text-lg text-muted">
+      Tell us what you're trying to prove or ship. The first call is 30
+      minutes; if there's a fit, you'll have a scoped proposal within a couple
+      of weeks.
+    </p>
+
+    <!-- TODO: replace this placeholder with the Cal.com/Calendly embed once the URL is provided -->
+    <div
+      class="mt-12 rounded-lg border border-dashed border-pine/50 bg-mist p-10 text-center"
+    >
+      <p class="font-mono text-sm text-muted">
+        TODO: Cal.com / Calendly scheduling embed goes here
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="font-display text-2xl font-bold tracking-tight">
+        Or send a note
+      </h2>
+      {/* TODO: confirm the one-business-day reply promise (shown on /request/thanks) */}
+      <form
+        name="contact"
+        method="POST"
+        action="/request/thanks"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="mt-6 space-y-6"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>
+            Don't fill this out if you're human: <input name="bot-field" />
+          </label>
+        </p>
+        <div>
+          <label for="name" class="font-medium">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            class={inputClasses}
+          />
+        </div>
+        <div>
+          <label for="company" class="font-medium">Company</label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            required
+            autocomplete="organization"
+            class={inputClasses}
+          />
+        </div>
+        <div>
+          <label for="email" class="font-medium">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class={inputClasses}
+          />
+        </div>
+        <div>
+          <label for="message" class="font-medium">
+            What are you trying to prove or ship?
+          </label>
+          <textarea id="message" name="message" rows="5" required class={inputClasses}
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="rounded-md bg-pine px-8 py-3 font-medium text-white transition-colors hover:bg-pine-deep"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+
+    <p class="mt-12 text-muted">
+      Prefer email?
+      <a href="mailto:info@w74.io" class="font-medium text-pine hover:text-pine-deep">
+        info@w74.io
+      </a>
+    </p>
+  </div>
+</Base>
