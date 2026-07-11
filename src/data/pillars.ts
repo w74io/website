@@ -26,6 +26,7 @@ export const pillars = [
     ],
     links: [
       { label: "View a sample M&V report (PDF)", href: "/assets/sample-mv-report.pdf", external: false },
+      { label: "Read our ML energy-modeling paper (PDF)", href: "/assets/ml-energy-modeling-paper.pdf", external: false },
     ],
   },
   {
