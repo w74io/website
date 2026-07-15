@@ -216,8 +216,8 @@ const demos = [
         Experience from pre-seed to Fortune 100
       </p>
       <p class="mt-3 font-mono text-xs tracking-wider text-muted uppercase">
-        Google · Meta · Pfizer · Shell · Accenture · Jane Energy · Bedrock
-        Energy
+        Google · Meta · Pfizer · Shell · Accenture · C3 AI · BlocPower ·
+        Carbon Lighthouse · Jane Energy · Bedrock Energy
       </p>
       <figure
         class="reveal mt-14 grid items-center gap-6 border-t border-line pt-10 md:grid-cols-[auto_1fr] md:gap-10"
@@ -296,6 +296,20 @@ const demos = [
                 </div>
               </div>
               <p class="mt-6 text-muted">{member.bio}</p>
+              {member.schools && (
+                <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  {member.schools.map((school) => (
+                    <img
+                      src={school.logo}
+                      alt={school.name}
+                      title={school.name}
+                      height="20"
+                      loading="lazy"
+                      class="h-5 w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                    />
+                  ))}
+                </div>
+              )}
             </li>
           ))
         }
