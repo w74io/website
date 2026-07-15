@@ -12,6 +12,21 @@ const stats = [
   { value: "$150M+", label: "Venture financing supported", color: "text-indigo" },
 ];
 
+/* One consolidated credibility strip under the Team header (per Bradley,
+   July 2026): marquee employers + schools only — smaller firms stay text-only
+   in the Working with W74 section. Shell and UConn deliberately omitted. */
+const experience = [
+  { name: "Google", logo: "/assets/logos/google.svg" },
+  { name: "Meta", logo: "/assets/logos/meta.svg" },
+  { name: "Pfizer", logo: "/assets/logos/pfizer.svg" },
+  { name: "Accenture", logo: "/assets/logos/accenture.svg" },
+  { name: "C3 AI", logo: "/assets/logos/c3ai.svg" },
+  { name: "MIT", logo: "/assets/schools/mit.svg" },
+  { name: "University of Chicago", logo: "/assets/schools/uchicago.svg" },
+  { name: "Stanford University", logo: "/assets/schools/stanford.svg" },
+  { name: "Cornell University", logo: "/assets/schools/cornell.svg", squat: true },
+];
+
 const demos = [
   {
     name: "Energy Forecast App",
@@ -265,6 +280,26 @@ const demos = [
       <h2 class="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
         W74 Team
       </h2>
+      <p class="mt-10 font-mono text-xs font-medium tracking-wider text-pine-deep uppercase">
+        Team experience from
+      </p>
+      <div class="mt-5 flex flex-wrap items-center gap-x-9 gap-y-5">
+        {
+          experience.map((item) => (
+            <img
+              src={item.logo}
+              alt={item.name}
+              title={item.name}
+              height="24"
+              loading="lazy"
+              class:list={[
+                item.squat ? "h-5" : "h-6",
+                "w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0",
+              ]}
+            />
+          ))
+        }
+      </div>
       <ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
         {
           team.map((member) => (
@@ -296,20 +331,6 @@ const demos = [
                 </div>
               </div>
               <p class="mt-6 text-muted">{member.bio}</p>
-              {member.schools && (
-                <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-                  {member.schools.map((school) => (
-                    <img
-                      src={school.logo}
-                      alt={school.name}
-                      title={school.name}
-                      height="20"
-                      loading="lazy"
-                      class="h-5 w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-                    />
-                  ))}
-                </div>
-              )}
             </li>
           ))
         }
