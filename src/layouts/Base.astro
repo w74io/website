@@ -19,6 +19,7 @@ const canonical = new URL(cleanPath, Astro.site);
 
 const navLinks = [
   { href: "/#work", label: "Projects" },
+  { href: "/#demos", label: "Demos" },
   { href: "/#team", label: "Team" },
 ];
 ---
@@ -151,7 +152,7 @@ const navLinks = [
             href="/request"
             class="rounded-md bg-pine px-3 py-2 text-sm font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md sm:px-4"
           >
-            Book an intro
+            Get Started
           </a>
         </div>
       </nav>
@@ -170,10 +171,12 @@ const navLinks = [
                 Ready to get started?
               </p>
               <a
-                href="mailto:info@w74.io"
-                class="text-lg text-mist hover:text-white"
+                href="https://calendly.com/bradley-w74"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded-md bg-pine px-5 py-2.5 font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-pine-deep hover:shadow-md"
               >
-                info@w74.io
+                Get Started
               </a>
             </div>
           )
@@ -184,8 +187,8 @@ const navLinks = [
           <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span>W74 Ventures LLC</span>
             <span aria-hidden="true">·</span>
-            <a href="mailto:info@w74.io" class="hover:text-white">
-              info@w74.io
+            <a href="mailto:info@w74.ai" class="hover:text-white">
+              info@w74.ai
             </a>
             <span aria-hidden="true">·</span>
             <a

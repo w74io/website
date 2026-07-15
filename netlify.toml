@@ -2,6 +2,20 @@
   command = "npm run build"
   publish = "dist"
 
+# Old-domain cutover: takes effect once w74.io is added as a domain alias
+# on this Netlify site and its DNS points here
+[[redirects]]
+  from = "https://w74.io/*"
+  to = "https://w74.ai/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.w74.io/*"
+  to = "https://w74.ai/:splat"
+  status = 301
+  force = true
+
 # /projects and /team merged into homepage sections (July 2026)
 [[redirects]]
   from = "/projects"
