@@ -45,7 +45,8 @@ export const pillars = [
     thumb: "/assets/pillars/oat.webp",
     thumbAlt: "Energy consumption vs. outdoor air temperature — pre/post-retrofit",
     /* Keep the Accenture dagger (†) disclosure attached wherever this appears. */
-    clients: "Accenture Smart Buildings | Jane Energy (Seed)",
+    clients: "Accenture Smart Buildings† | Jane Energy (Seed)",
+    footnote: "† Work led by W74 team members at Accenture, prior to W74.",
     cases: [
       "Ongoing fault detection & HVAC optimization across 150+ properties in a global smart-buildings portfolio.",
       "Virtual energy audits across multifamily, commercial, and industrial portfolios — including several REIT owners — identifying savings of 25–30% of utility spend per property from utility bills, permits, and weather data, delivered as a prioritized quick-wins-vs-capex roadmap.",

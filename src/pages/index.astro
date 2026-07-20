@@ -16,17 +16,19 @@ const stats = [
    July 2026): employers + schools. Shell, UConn, and Cornell deliberately
    omitted. BlocPower recolored from their white lockup; Carbon Lighthouse
    is the pre-Centinel-rebrand wordmark (via Wayback Machine). */
+/* width = intrinsic aspect ratio × the rendered 20px height, to avoid layout
+   shift as the lazy-loaded logos come in */
 const experience = [
-  { name: "Google", logo: "/assets/logos/google.svg" },
-  { name: "Meta", logo: "/assets/logos/meta.svg" },
-  { name: "Pfizer", logo: "/assets/logos/pfizer.svg" },
-  { name: "Accenture", logo: "/assets/logos/accenture.svg" },
-  { name: "C3 AI", logo: "/assets/logos/c3ai.svg" },
-  { name: "BlocPower", logo: "/assets/logos/blocpower.png" },
-  { name: "Carbon Lighthouse", logo: "/assets/logos/carbonlighthouse.png" },
-  { name: "MIT", logo: "/assets/schools/mit.svg" },
-  { name: "University of Chicago", logo: "/assets/schools/uchicago.svg" },
-  { name: "Stanford University", logo: "/assets/schools/stanford.svg" },
+  { name: "Google", logo: "/assets/logos/google.svg", width: 59 },
+  { name: "Meta", logo: "/assets/logos/meta.svg", width: 99 },
+  { name: "Pfizer", logo: "/assets/logos/pfizer.svg", width: 49 },
+  { name: "Accenture", logo: "/assets/logos/accenture.svg", width: 76 },
+  { name: "C3 AI", logo: "/assets/logos/c3ai.svg", width: 58 },
+  { name: "BlocPower", logo: "/assets/logos/blocpower.png", width: 69 },
+  { name: "Carbon Lighthouse", logo: "/assets/logos/carbonlighthouse.png", width: 58 },
+  { name: "MIT", logo: "/assets/schools/mit.svg", width: 39 },
+  { name: "University of Chicago", logo: "/assets/schools/uchicago.svg", width: 80 },
+  { name: "Stanford University", logo: "/assets/schools/stanford.svg", width: 95 },
 ];
 
 const demos = [
@@ -49,7 +51,7 @@ const demos = [
 
 <Base
   title="W74 — Product & Technology for Climate and Energy Companies"
-  description="W74 partners with climate and energy companies to validate performance, reduce energy and OpEx, build better products, and accelerate growth — through fixed-scope projects or embedded fractional support."
+  description="W74 partners with climate and energy companies to build better products, validate performance, reduce energy and OpEx, and accelerate growth — through fixed-scope projects or embedded fractional support."
 >
   <!-- 1. Hero (load-curve band sits between the sub text and the CTA row) -->
   <section class="border-b border-line">
@@ -58,9 +60,9 @@ const demos = [
         Accelerate your climate work
       </h1>
       <p class="mt-6 max-w-2xl text-lg text-muted">
-        W74 partners with climate &amp; energy companies to validate
-        performance, reduce energy and OpEx, build better products, and
-        accelerate growth.
+        W74 partners with climate &amp; energy companies to build better
+        products, validate performance, reduce energy and OpEx, and accelerate
+        growth.
       </p>
     </div>
     {/* Remove `interactive` to fall back to the static chart */}
@@ -139,6 +141,11 @@ const demos = [
                 {pillar.cases.map((text) => (
                   <p class="mt-3 text-muted">{text}</p>
                 ))}
+                {"footnote" in pillar && (
+                  <p class="mt-3 font-mono text-xs text-muted">
+                    {pillar.footnote}
+                  </p>
+                )}
                 {pillar.links.length > 0 && (
                   <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
                     {pillar.links.map((link) => (
@@ -149,10 +156,9 @@ const demos = [
                           rel={link.external ? "noopener noreferrer" : undefined}
                           class="text-sm font-medium text-pine hover:text-pine-deep"
                         >
-                          {link.label}<span
-                            class="text-indigo"
-                            aria-hidden="true">&nbsp;↗</span
-                          >
+                          {link.label}{link.external && (
+                            <span class="text-indigo" aria-hidden="true">&nbsp;↗</span>
+                          )}
                         </a>
                       </li>
                     ))}
@@ -287,6 +293,7 @@ const demos = [
               src={item.logo}
               alt={item.name}
               title={item.name}
+              width={item.width}
               height="20"
               loading="lazy"
               class="h-5 w-auto opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
